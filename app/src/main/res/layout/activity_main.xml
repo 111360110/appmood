@@ -6,10 +6,31 @@
     android:gravity="center"
     android:padding="16dp">
 
-    <Button
-        android:id="@+id/btn_record_mood"
+    <TextView
+        android:id="@+id/text_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="歡迎!"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="20dp" />
+
+
+    <TextView
+        android:id="@+id/text_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="當前時間"
+        android:textSize="16sp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center" />
+
+
+    <Button
+        android:id="@+id/btn_record_mood"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="記錄情緒" />
 
     <Button
@@ -18,4 +39,7 @@
         android:layout_height="wrap_content"
         android:text="查看舒壓建議"
         android:layout_marginTop="16dp" />
+
+
+
 </LinearLayout>
