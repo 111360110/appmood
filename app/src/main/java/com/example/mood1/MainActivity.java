@@ -1,32 +1,114 @@
 package com.example.mood1;
 
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.example.mood1.data.Mood;
+import com.example.mood1.data.MoodDatabase;
+
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
+
+    private TextView todayMoodTextView;
+    private TextView todayDiaryTextView;
+    private LottieAnimationView lottieAnimationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 記錄情緒按鈕
-        findViewById(R.id.btn_record_mood).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, MoodActivity.class));
-            }
+        // 初始化元件
+        lottieAnimationView = findViewById(R.id.lottie_animation);
+        todayMoodTextView = findViewById(R.id.txt_today_mood);
+        todayDiaryTextView = findViewById(R.id.txt_today_diary);
+        Button btnRecordMood = findViewById(R.id.btn_record_mood);
+        Button btnSuggestions = findViewById(R.id.btn_suggestions);
+        Button btnViewChart = findViewById(R.id.btn_view_chart);
+        Button btnStopAnimation = findViewById(R.id.btn_stop_animation); // 停止動畫按鈕
+
+        // 顯示今日心情和日記
+        displayTodayMood();
+
+        // 點擊記錄心情按鈕
+        btnRecordMood.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MoodActivity.class);
+            startActivity(intent);
+            // 添加過渡動畫
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
 
-        // 舒壓建議按鈕
-        findViewById(R.id.btn_suggestions).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SuggestionActivity.class));
-            }
+        // 點擊查看建議按鈕
+        btnSuggestions.setOnClickListener(v -> {
+            lottieAnimationView.playAnimation(); // 播放動畫
+            Toast.makeText(this, "顯示建議", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, SuggestionActivity.class);
+            startActivity(intent);
+            // 添加過渡動畫
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
+
+        // 點擊查看圖表按鈕
+        btnViewChart.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MoodChartActivity.class);
+            startActivity(intent);
+            // 添加過渡動畫
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        });
+
+        // 點擊停止動畫按鈕
+        btnStopAnimation.setOnClickListener(v -> {
+            lottieAnimationView.pauseAnimation(); // 暫停動畫
+            Toast.makeText(this, "動畫已停止", Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    // 顯示今日心情
+    protected void displayTodayMood() {
+        // 計算今天的開始時間戳
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        long startOfDay = calendar.getTimeInMillis();
+
+        // 獲取資料庫實例
+        MoodDatabase database = MoodDatabase.getInstance(this);
+
+        new Thread(() -> {
+            // 從資料庫中查詢今天的心情
+            Mood todayMood = database.moodDao().getMoodForToday(startOfDay);
+
+            // 更新 UI
+            runOnUiThread(() -> {
+                if (todayMood != null) {
+                    String moodType = todayMood.getMoodType();
+                    String diary = todayMood.getDiary();
+                    todayMoodTextView.setText("今日心情：" + moodType);
+                    todayDiaryTextView.setText("今日日記：" + diary);
+                    Log.d("MainActivity", "Fetched mood for today: " + diary);
+                } else {
+                    todayMoodTextView.setText("今日心情：尚未記錄");
+                    todayDiaryTextView.setText("今日日記：尚未記錄");
+                    Log.d("MainActivity", "No mood data for today.");
+                }
+            });
+        }).start();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        // 返回時的過渡動畫
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }

@@ -13,4 +13,13 @@
         android:text="推薦活動將顯示在這裡"
         android:textSize="18sp"
         android:gravity="center" />
+
+    <Button
+        android:id="@+id/btn_back_to_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="返回主畫面"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
+
 </LinearLayout>
