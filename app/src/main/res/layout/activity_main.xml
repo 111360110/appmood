@@ -6,6 +6,34 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
+<<<<<<< HEAD
+    <TextView
+        android:id="@+id/text_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="歡迎!"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="20dp" />
+
+
+    <TextView
+        android:id="@+id/text_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="當前時間"
+        android:textSize="16sp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center" />
+
+
+    <Button
+        android:id="@+id/btn_record_mood"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="記錄情緒" />
+=======
     <!-- Display today's mood -->
     <TextView
         android:id="@+id/txt_today_mood"
@@ -54,6 +82,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"/>
+>>>>>>> 59cb55811b1f3e11f15d2ad2148a3a1ee44a3021
 
     <!-- View suggestions button -->
     <Button
@@ -87,4 +116,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
+<<<<<<< HEAD
+
+
+</LinearLayout>
+=======
 </androidx.constraintlayout.widget.ConstraintLayout>
+>>>>>>> 59cb55811b1f3e11f15d2ad2148a3a1ee44a3021
