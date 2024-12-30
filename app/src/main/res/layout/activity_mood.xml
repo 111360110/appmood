@@ -1,28 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     android:padding="16dp">
 
+    <EditText
+        android:id="@+id/edt_diary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="寫下您的心情日記..."
+        android:inputType="textMultiLine"
+        android:padding="16dp"
+        android:background="@drawable/edittext_background"
+        android:textSize="16sp"/>
+
+    <!-- 開心按鈕 -->
     <Button
         android:id="@+id/btn_happy"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="開心" />
+        android:text="開心"
+        app:layout_constraintTop_toBottomOf="@id/edt_diary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
 
+    <!-- 難過按鈕 -->
     <Button
         android:id="@+id/btn_sad"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="難過"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintTop_toBottomOf="@id/btn_happy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
 
+    <!-- 緊張按鈕 -->
     <Button
         android:id="@+id/btn_stressed"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="緊張"
-        android:layout_marginTop="16dp" />
-</LinearLayout>
+        app:layout_constraintTop_toBottomOf="@id/btn_sad"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- 平靜按鈕 -->
+    <Button
+        android:id="@+id/btn_calm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="平靜"
+        app:layout_constraintTop_toBottomOf="@id/btn_stressed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- 興奮按鈕 -->
+    <Button
+        android:id="@+id/btn_excited"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="興奮"
+        app:layout_constraintTop_toBottomOf="@id/btn_calm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- 生氣 -->
+    <Button
+        android:id="@+id/btn_angry"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="生氣"
+        app:layout_constraintTop_toBottomOf="@id/btn_excited"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- 疲憊 -->
+    <Button
+        android:id="@+id/btn_tired"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="疲憊"
+        app:layout_constraintTop_toBottomOf="@id/btn_angry"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
